@@ -61,7 +61,7 @@ jobs:
           sed -i "s/gar-location/$GAR_LOCATION/g" kubernetes/deployment.yaml
           sed -i "s/project-id/$PROJECT_ID/g" kubernetes/deployment.yaml
           sed -i "s/repository/$REPOSITORY/g" kubernetes/deployment.yaml
-          sed -i "s/image/$IMAGE/g" kubernetes/deployment.yaml
+          sed -i "s/image-name/$IMAGE/g" kubernetes/deployment.yaml
           
           cat kubernetes/deployment.yaml
           
