@@ -1,0 +1,55 @@
+name: Build and Deploy to GKE
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  # GCP Auth settings
+  CREDENTIALS_JSON: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  # GCP Artifact Repository settings
+  REPOSITORY: cloud-app-repository
+  GAR_LOCATION: europe-central2
+  IMAGE: cloud-app-image
+  # GCP Cluster Settings
+  GKE_CLUSTER: cloud-app-cluster
+  GKE_ZONE: europe-central2
+  DEPLOYMENT_NAME: cloud-app-deployment
+
+jobs:
+  deploy:
+    name: Deploy Docker Image to GCP Artifact Repository
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Code Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate with gcloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ env.CREDENTIALS_JSON }}
+
+      - name: Install the gcloud cli
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.PROJECT_ID }}
+          skip_install: false
+          version: latest
+
+      - name: Automatic Tagging of Releases
+        id: increment-git-tag
+        run: |
+          bash ./scripts/git_update.sh -v patch
+
+      - name: Build and Push the Docker Image to Artifact Repository
+        env:
+          GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
+          GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
+        run: |
+          gcloud auth configure-docker $GAR_LOCATION-docker.pkg.dev
+          docker build -t $GAR_LOCATION-docker.pkg.dev/$GOOGLE_PROJECT/$REPOSITORY/$IMAGE:latest .
+          docker build -t $GAR_LOCATION-docker.pkg.dev/$GOOGLE_PROJECT/$REPOSITORY/$IMAGE:$GIT_TAG .
+          docker push $GAR_LOCATION-docker.pkg.dev/$GOOGLE_PROJECT/$REPOSITORY/$IMAGE:latest
+          docker push $GAR_LOCATION-docker.pkg.dev/$GOOGLE_PROJECT/$REPOSITORY/$IMAGE:$GIT_TAG
