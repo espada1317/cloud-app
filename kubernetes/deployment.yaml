@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloud-app-deployment
+  labels:
+    app: cloud-app-pod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cloud-app-pod
+  template:
+    metadata:
+      labels:
+        app: cloud-app-pod
+    spec:
+      containers:
+        - name: cloud-app-container
+          image: europe-central2-docker.pkg.dev/focal-road-420515/cloud-app-repository/cloud-app-image:latest
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            periodSeconds: 10
+            initialDelaySeconds: 5
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"

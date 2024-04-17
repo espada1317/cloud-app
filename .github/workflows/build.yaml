@@ -18,7 +18,7 @@ env:
   DEPLOYMENT_NAME: cloud-app-deployment
 
 jobs:
-  deploy:
+  deploy-docker-image:
     name: Deploy Docker Image to GCP Artifact Repository
     runs-on: ubuntu-latest
     steps:
@@ -37,6 +37,7 @@ jobs:
           project_id: ${{ secrets.PROJECT_ID }}
           skip_install: false
           version: latest
+          install_components: 'gke-gcloud-auth-plugin'
 
       - name: Automatic Tagging of Releases
         id: increment-git-tag
@@ -45,11 +46,16 @@ jobs:
 
       - name: Build and Push the Docker Image to Artifact Repository
         env:
-          GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
           GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
         run: |
           gcloud auth configure-docker $GAR_LOCATION-docker.pkg.dev
-          docker build -t $GAR_LOCATION-docker.pkg.dev/$GOOGLE_PROJECT/$REPOSITORY/$IMAGE:latest .
-          docker build -t $GAR_LOCATION-docker.pkg.dev/$GOOGLE_PROJECT/$REPOSITORY/$IMAGE:$GIT_TAG .
-          docker push $GAR_LOCATION-docker.pkg.dev/$GOOGLE_PROJECT/$REPOSITORY/$IMAGE:latest
-          docker push $GAR_LOCATION-docker.pkg.dev/$GOOGLE_PROJECT/$REPOSITORY/$IMAGE:$GIT_TAG
+          docker build -t $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:latest .
+          docker build -t $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GIT_TAG .
+          docker push $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:latest
+          docker push $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GIT_TAG
+
+      - name: Deploy Cluster to GKE
+        run: |
+          gcloud container clusters get-credentials $GKE_CLUSTER --region $GKE_ZONE
+          kubectl apply -f kubernetes/deployment.yaml
+          kubectl apply -f kubernetes/service.yaml
