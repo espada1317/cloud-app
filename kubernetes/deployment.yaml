@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: cloud-app-container
-          image: gar-location-docker.pkg.dev/project-id/repository/image-name:latest
+          image: gar-location-docker.pkg.dev/project-id/repository/image-name:image-version
           livenessProbe:
             httpGet:
               path: /
