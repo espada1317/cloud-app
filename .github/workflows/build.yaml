@@ -57,5 +57,12 @@ jobs:
       - name: Deploy Cluster to GKE
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --region $GKE_ZONE
+          
+          sed -i "s/gar-location/$GAR_LOCATION/g" kubernetes/deployment.yaml
+          sed -i "s/project-id/$PROJECT_ID/g" kubernetes/deployment.yaml
+          sed -i "s/repository/$REPOSITORY/g" kubernetes/deployment.yaml
+          sed -i "s/image/$IMAGE/g" kubernetes/deployment.yaml
+          
           kubectl apply -f kubernetes/deployment.yaml
           kubectl apply -f kubernetes/service.yaml
+          kubectl apply -f kubernetes/hpa.yaml

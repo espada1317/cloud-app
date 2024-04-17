@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: cloud-app-container
-          image: europe-central2-docker.pkg.dev/focal-road-420515/cloud-app-repository/cloud-app-image:latest
+          image: gar-location-docker.pkg.dev/project-id/repository/image:latest
           livenessProbe:
             httpGet:
               path: /
@@ -25,5 +25,5 @@ spec:
             initialDelaySeconds: 5
           resources:
             limits:
-              cpu: "1"
+              cpu: "150m"
               memory: "512Mi"
