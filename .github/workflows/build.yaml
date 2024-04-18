@@ -66,5 +66,5 @@ jobs:
           sed -i "s/image-name/$IMAGE/g" kubernetes/app/deployment.yaml
           sed -i "s/image-version/$GIT_TAG/g" kubernetes/app/deployment.yaml
           
-          kubectl get crds
           kubectl apply -f kubernetes/crds         
+          kubectl apply -f kubernetes/prometheus-operator         
