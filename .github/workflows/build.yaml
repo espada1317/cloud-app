@@ -69,3 +69,15 @@ jobs:
           kubectl apply -f kubernetes/deployment.yaml
           kubectl apply -f kubernetes/service.yaml
           kubectl apply -f kubernetes/hpa.yaml
+
+        # install grafana and prometheus
+          ACCOUNT=$(gcloud info --format='value(config.account)')
+          kubectl create clusterrolebinding owner-cluster-admin-binding \
+          --clusterrole cluster-admin \
+          --user $ACCOUNT
+               
+          kubectl create namespace monitoring
+          kubectl create -f kubernetes/prometheus/clusterRole.yaml
+          kubectl create -f kubernetes/prometheus/config-map.yaml
+          kubectl create -f kubernetes/prometheus/prometheus-deployment.yaml
+          kubectl create -f kubernetes/prometheus/prometheus-service.yaml --namespace=monitoring
