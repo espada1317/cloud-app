@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cloud-app-deployment
-  namespace: apps
+  namespace: monitoring
   labels:
     app: cloud-app-pod
 spec:
