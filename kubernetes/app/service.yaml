@@ -3,17 +3,14 @@ kind: Service
 metadata:
   name: cloud-app-service
   namespace: default
-  annotations:
-    prometheus.io/port: "metrics"
-    prometheus.io/scrape: "true"
   labels:
-    app.kubernetes.io/name: cloud-app-monitor
+    app: cloud-app-service
 spec:
   type: ClusterIP
-  selector:
-    app.kubernetes.io/name: cloud-app-monitor
   ports:
-    - name: "metrics"
+    - name: cloud
+      port: 8081
       protocol: TCP
-      port: 8080
-      targetPort: 8080
+      targetPort: cloud
+  selector:
+    app: cloud-app-service

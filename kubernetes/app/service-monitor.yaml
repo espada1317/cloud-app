@@ -2,16 +2,15 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: cloud-service-monitor
+  name: cloud-app-service
   namespace: default
 spec:
   endpoints:
-    - interval: 10s
-      port: metrics
-      scrapeTimeout: 9s
+    - honorLabels: true
+      port: cloud
   namespaceSelector:
     matchNames:
       - default
   selector:
     matchLabels:
-      app.kubernetes.io/name: cloud-app-monitor
+      app: cloud-app-service
