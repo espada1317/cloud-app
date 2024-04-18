@@ -74,7 +74,6 @@ jobs:
           helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
           
           helm repo update
-          helm init
           helm install prometheus-operator prometheus-community/kube-prometheus-stack -n monitoring
           
           kubectl get pods -n monitoring
