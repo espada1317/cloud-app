@@ -71,8 +71,7 @@ jobs:
           kubectl apply -f kubernetes/hpa.yaml
 
           ACCOUNT=$(gcloud info --format='value(config.account)')
-          kubectl get clusterrolebinding owner-cluster-admin-binding && echo "ClusterRoleBinding already exists." 
-               || (ACCOUNT=$(gcloud info --format='value(config.account)') && kubectl create clusterrolebinding owner-cluster-admin-binding --clusterrole cluster-admin --user $ACCOUNT)
+          kubectl get clusterrolebinding owner-cluster-admin-binding && echo "ClusterRoleBinding already exists." || (ACCOUNT=$(gcloud info --format='value(config.account)') && kubectl create clusterrolebinding owner-cluster-admin-binding --clusterrole cluster-admin --user $ACCOUNT)
 
           kubectl create namespace monitoring
           kubectl create -f kubernetes/prometheus/clusterRole.yaml
