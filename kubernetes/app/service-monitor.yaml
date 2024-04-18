@@ -8,9 +8,6 @@ spec:
   endpoints:
     - honorLabels: true
       port: cloud
-  namespaceSelector:
-    matchNames:
-      - default
   selector:
     matchLabels:
       app: cloud-app-service
