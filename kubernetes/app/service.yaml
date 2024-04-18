@@ -9,6 +9,7 @@ metadata:
   labels:
     app.kubernetes.io/part-of: cloud-app-monitor
 spec:
+  type: ClusterIP
   selector:
     app: cloud-app-pod
   ports:
@@ -16,4 +17,3 @@ spec:
       protocol: TCP
       port: 8080
       targetPort: 8080
-  type: LoadBalancer
