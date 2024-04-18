@@ -79,6 +79,6 @@ jobs:
           kubectl apply -f kubernetes/prometheus/prometheus-deployment.yaml
           kubectl apply -f kubernetes/prometheus/prometheus-service.yaml --namespace=monitoring
 
-          kubectl get configmap grafana-datasources --ignore-not-found=true >/dev/null || kubectl apply -f kubernetes/grafana/grafana-datasource-config.yaml
+          kubectl apply -f kubernetes/grafana/grafana-datasource-config.yaml
           kubectl apply -f kubernetes/grafana/grafana-deployment.yaml
           kubectl apply -f kubernetes/grafana/grafana-service.yaml
