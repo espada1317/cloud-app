@@ -70,7 +70,6 @@ jobs:
           kubectl apply -f kubernetes/service.yaml
           kubectl apply -f kubernetes/hpa.yaml
 
-        # install grafana and prometheus
           ACCOUNT=$(gcloud info --format='value(config.account)')
           kubectl create clusterrolebinding owner-cluster-admin-binding --clusterrole cluster-admin --user $ACCOUNT
                
