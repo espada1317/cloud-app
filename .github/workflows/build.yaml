@@ -69,3 +69,4 @@ jobs:
           kubectl apply -f kubernetes/crds         
           kubectl apply -f kubernetes/prometheus-operator         
           kubectl apply -f kubernetes/prometheus       
+          kubectl apply -f kubernetes/grafana       
