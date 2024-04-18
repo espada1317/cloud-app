@@ -29,8 +29,5 @@ roleRef:
   name: prometheus
 subjects:
   - kind: ServiceAccount
-    name: monitoring-prom
+    name: default
     namespace: monitoring
-  - kind: ServiceAccount
-    namespace: default
-    name: default-prom
