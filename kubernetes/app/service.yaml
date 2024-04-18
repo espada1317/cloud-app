@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cloud-app-service
+  namespace: apps
   labels:
     app: cloud-app-service
 spec:
