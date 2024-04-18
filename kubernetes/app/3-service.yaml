@@ -4,13 +4,12 @@ metadata:
   name: cloud-app-service
   namespace: monitoring
   labels:
-    app: cloud-app-service
+    app: cloud-app
 spec:
   type: ClusterIP
   ports:
     - name: cloud
       port: 8081
       protocol: TCP
-      targetPort: cloud
   selector:
-    app: cloud-app-service
+    app: cloud-app

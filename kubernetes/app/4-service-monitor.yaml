@@ -13,4 +13,4 @@ spec:
       - apps
   selector:
     matchLabels:
-      app: cloud-app-service
+      app: cloud-app

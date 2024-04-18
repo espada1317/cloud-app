@@ -1,30 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cloud-app-deployment
+  name: cloud-app
   namespace: monitoring
   labels:
-    app: cloud-app-pod
+    app: cloud-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: cloud-app-pod
+      app: cloud-app
   template:
     metadata:
       labels:
-        app: cloud-app-pod
+        app: cloud-app
     spec:
       containers:
-        - name: cloud-app-container
+        - name: cloud-app
           image: gar-location-docker.pkg.dev/project-id/repository/image-name:image-version
+          ports:
+            - name: cloud
+              containerPort: 8081
+              protocol: TCP
           livenessProbe:
+            failureThreshold: 10
             httpGet:
               path: /
-              port: 8080
+              port: cloud
             periodSeconds: 10
             initialDelaySeconds: 5
           resources:
             limits:
-              cpu: 150m
+              cpu: 200m
               memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
