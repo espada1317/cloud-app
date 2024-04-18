@@ -60,24 +60,11 @@ jobs:
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --region $GKE_ZONE
           
-          sed -i "s/gar-location/$GAR_LOCATION/g" kubernetes/deployment.yaml
-          sed -i "s/project-id/$PROJECT_ID/g" kubernetes/deployment.yaml
-          sed -i "s/repository/$REPOSITORY/g" kubernetes/deployment.yaml
-          sed -i "s/image-name/$IMAGE/g" kubernetes/deployment.yaml
-          sed -i "s/image-version/$GIT_TAG/g" kubernetes/deployment.yaml
+          sed -i "s/gar-location/$GAR_LOCATION/g" kubernetes/app/deployment.yaml
+          sed -i "s/project-id/$PROJECT_ID/g" kubernetes/app/deployment.yaml
+          sed -i "s/repository/$REPOSITORY/g" kubernetes/app/deployment.yaml
+          sed -i "s/image-name/$IMAGE/g" kubernetes/app/deployment.yaml
+          sed -i "s/image-version/$GIT_TAG/g" kubernetes/app/deployment.yaml
           
-          kubectl apply -f kubernetes/deployment.yaml
-          kubectl apply -f kubernetes/service.yaml
-          kubectl apply -f kubernetes/hpa.yaml
-
-          kubectl get namespace monitoring && echo "Namespace 'monitoring' already exists." || kubectl create namespace monitoring
-          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-          
-          helm repo update
-          helm install prometheus-operator prometheus-community/kube-prometheus-stack -n monitoring
-          
-          kubectl get pods -n monitoring
-          kubectl get svc -n monitoring
-          kubectl port-forward svc/prometheus-operator-kube-p-prometheus -n monitoring 9090:9090
-          kubectl port-forward svc/prometheus-operator-grafana -n monitoring 3000:80
-          
+          kubectl get kubernetes/crds
+          kubectl apply -f kubernetes/crds         
