@@ -74,7 +74,7 @@ jobs:
           kubectl get clusterrolebinding owner-cluster-admin-binding && echo "ClusterRoleBinding already exists." || (ACCOUNT=$(gcloud info --format='value(config.account)') && kubectl create clusterrolebinding owner-cluster-admin-binding --clusterrole cluster-admin --user $ACCOUNT)
           kubectl get namespace monitoring && echo "Namespace 'monitoring' already exists." || kubectl create namespace monitoring
 
-          kubectl create -f kubernetes/prometheus/clusterRole.yaml
+          kubectl create -f kubernetes/prometheus/clusterRole.yaml --force
           kubectl create -f kubernetes/prometheus/config-map.yaml
           kubectl create -f kubernetes/prometheus/prometheus-deployment.yaml
           kubectl create -f kubernetes/prometheus/prometheus-service.yaml --namespace=monitoring
