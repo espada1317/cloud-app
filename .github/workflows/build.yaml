@@ -75,7 +75,9 @@ jobs:
           kubectl get namespace monitoring && echo "Namespace 'monitoring' already exists." || kubectl create namespace monitoring
           kubectl apply -f kubernetes/prometheus/clusterRole.yaml
           kubectl apply -f kubernetes/prometheus/config-map.yaml
-      
+
+          kubectl apply -f https://raw.githubusercontent.com/coreos/prometheus-operator/master/bundle.yaml
+    
           kubectl apply -f kubernetes/prometheus/prometheus-deployment.yaml
           kubectl apply -f kubernetes/prometheus/prometheus-service.yaml --namespace=monitoring
           kubectl apply -f kubernetes/prometheus/pod-monitoring.yaml
