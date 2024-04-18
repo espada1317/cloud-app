@@ -70,10 +70,15 @@ jobs:
           kubectl apply -f kubernetes/service.yaml
           kubectl apply -f kubernetes/hpa.yaml
 
-          ACCOUNT=$(gcloud info --format='value(config.account)')
-          kubectl get clusterrolebinding owner-cluster-admin-binding && echo "ClusterRoleBinding already exists." || (ACCOUNT=$(gcloud info --format='value(config.account)') && kubectl create clusterrolebinding owner-cluster-admin-binding --clusterrole cluster-admin --user $ACCOUNT)
-
-          kubectl apply -f kubernetes/prometheus/clusterRole.yaml
-          kubectl apply -f kubernetes/prometheus/config-map.yaml
-          kubectl apply -f kubernetes/prometheus/prometheus-deployment.yaml
-          kubectl apply -f kubernetes/prometheus/prometheus-service.yaml --namespace=default
+          kubectl get namespace monitoring && echo "Namespace 'monitoring' already exists." || kubectl create namespace monitoring
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          
+          helm repo update
+          helm init
+          helm install prometheus-operator prometheus-community/kube-prometheus-stack -n monitoring
+          
+          kubectl get pods -n monitoring
+          kubectl get svc -n monitoring
+          kubectl port-forward svc/prometheus-operator-kube-p-prometheus -n monitoring 9090:9090
+          kubectl port-forward svc/prometheus-operator-grafana -n monitoring 3000:80
+          
