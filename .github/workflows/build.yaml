@@ -74,3 +74,5 @@ jobs:
           kubectl apply -f kubernetes/app/deployment.yaml
           kubectl apply -f kubernetes/app/service.yaml
           kubectl apply -f kubernetes/app/hpa.yaml
+          
+          kubectl apply -f kubernetes/app/service-monitor.yaml
