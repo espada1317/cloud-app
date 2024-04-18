@@ -7,11 +7,11 @@ metadata:
     prometheus.io/port: "metrics"
     prometheus.io/scrape: "true"
   labels:
-    app.kubernetes.io/part-of: cloud-app-monitor
+    app.kubernetes.io/name: cloud-app-monitor
 spec:
   type: ClusterIP
   selector:
-    app: cloud-app-pod
+    app.kubernetes.io/name: cloud-app-monitor
   ports:
     - name: "metrics"
       protocol: TCP
