@@ -23,3 +23,5 @@ rules:
     verbs: ["get", "list", "watch"]
   - nonResourceURLs: ["/metrics"]
     verbs: ["get"]
+  - nonResourceURLs: [ "/actuator/prometheus" ]
+    verbs: [ "get" ]
