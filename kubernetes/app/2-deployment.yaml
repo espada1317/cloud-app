@@ -15,6 +15,7 @@ spec:
       labels:
         app: cloud-app
     spec:
+      serviceAccountName: cloud-app
       containers:
         - name: cloud-app
           image: gar-location-docker.pkg.dev/project-id/repository/image-name:image-version
