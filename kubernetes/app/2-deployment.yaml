@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cloud-app
-  namespace: apps
+  namespace: production
   labels:
     app: cloud-app
 spec:
