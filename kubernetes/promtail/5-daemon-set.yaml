@@ -12,7 +12,7 @@ spec:
       labels:
         name: promtail
     spec:
-      serviceAccountName: SERVICE_ACCOUNT
+      serviceAccountName: promtail-serviceaccount
       volumes:
         - name: logs
           hostPath:
