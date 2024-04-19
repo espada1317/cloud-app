@@ -46,10 +46,8 @@ rules:
       - ""
     resources:
       - services
-      - services/actuator/prometheus
       - services/finalizers
       - endpoints
-      - endpoints/actuator/prometheus
     verbs:
       - get
       - create
@@ -59,7 +57,6 @@ rules:
       - ""
     resources:
       - nodes
-      - nodes/actuator/prometheus
     verbs:
       - list
       - watch

@@ -8,13 +8,9 @@ rules:
     resources:
       - nodes
       - nodes/metrics
-      - nodes/actuator/prometheus
       - services
-      - services/actuator/prometheus
       - endpoints
-      - endpoints/actuator/prometheus
       - pods
-      - pods/actuator/prometheus
     verbs: ["get", "list", "watch"]
   - apiGroups: [""]
     resources:
