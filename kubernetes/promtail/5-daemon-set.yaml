@@ -15,8 +15,7 @@ spec:
       serviceAccountName: promtail-serviceaccount
       volumes:
         - name: logs
-          hostPath:
-            path: HOST_PATH
+          emptyDir: {}
         - name: promtail-config
           configMap:
             name: promtail-config
