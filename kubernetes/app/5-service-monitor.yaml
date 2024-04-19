@@ -3,7 +3,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: cloud-app
-  namespace: monitoring
+  namespace: apps
   labels:
     team: devops-by-example
 spec:
@@ -13,7 +13,7 @@ spec:
       path: /actuator/prometheus
   namespaceSelector:
     matchNames:
-      - monitoring
+      - apps
   selector:
     matchLabels:
       app: cloud-app
