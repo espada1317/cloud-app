@@ -12,7 +12,7 @@ spec:
       port: web
   namespaceSelector:
     matchNames:
-      - apps
+      - monitoring
   selector:
     matchLabels:
       app: cloud-app
