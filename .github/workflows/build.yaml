@@ -60,11 +60,11 @@ jobs:
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --region $GKE_ZONE
           
-          sed -i "s/gar-location/$GAR_LOCATION/g" kubernetes/app/1-deployment.yaml
-          sed -i "s/project-id/$PROJECT_ID/g" kubernetes/app/1-deployment.yaml
-          sed -i "s/repository/$REPOSITORY/g" kubernetes/app/1-deployment.yaml
-          sed -i "s/image-name/$IMAGE/g" kubernetes/app/1-deployment.yaml
-          sed -i "s/image-version/$GIT_TAG/g" kubernetes/app/1-deployment.yaml
+          sed -i "s/gar-location/$GAR_LOCATION/g" kubernetes/app/2-deployment.yaml
+          sed -i "s/project-id/$PROJECT_ID/g" kubernetes/app/2-deployment.yaml
+          sed -i "s/repository/$REPOSITORY/g" kubernetes/app/2-deployment.yaml
+          sed -i "s/image-name/$IMAGE/g" kubernetes/app/2-deployment.yaml
+          sed -i "s/image-version/$GIT_TAG/g" kubernetes/app/2-deployment.yaml
           
           kubectl apply -f kubernetes/crds         
           kubectl apply -f kubernetes/prometheus-operator         
