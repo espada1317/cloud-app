@@ -4,6 +4,8 @@ kind: ServiceMonitor
 metadata:
   name: cloud-app-service
   namespace: monitoring
+  labels:
+    team: devops-by-example
 spec:
   endpoints:
     - honorLabels: true
