@@ -8,6 +8,7 @@ rules:
     resources:
       - nodes
       - nodes/metrics
+      - nodes/actuator/prometheus
       - services
       - endpoints
       - pods
@@ -21,7 +22,5 @@ rules:
     resources:
       - ingresses
     verbs: ["get", "list", "watch"]
-  - nonResourceURLs: ["/metrics"]
+  - nonResourceURLs: ["/metrics", "/actuator/prometheus"]
     verbs: ["get"]
-  - nonResourceURLs: [ "/actuator/prometheus" ]
-    verbs: [ "get" ]
