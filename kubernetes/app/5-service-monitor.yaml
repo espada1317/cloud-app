@@ -11,9 +11,6 @@ spec:
     - honorLabels: true
       port: web
       path: /actuator/prometheus
-  namespaceSelector:
-    matchNames:
-      - production
   selector:
     matchLabels:
       app: cloud-app
