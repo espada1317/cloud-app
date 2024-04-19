@@ -20,7 +20,7 @@ spec:
           image: gar-location-docker.pkg.dev/project-id/repository/image-name:image-version
           ports:
             - name: cloud
-              containerPort: 8081
+              containerPort: 8080
               protocol: TCP
           livenessProbe:
             failureThreshold: 10
