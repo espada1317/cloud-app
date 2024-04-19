@@ -40,3 +40,7 @@ spec:
         runAsNonRoot: true
         runAsUser: 65534
       serviceAccountName: prometheus-operator
+      volumes:
+        - name: config
+          configMap:
+            name: prometheus-server-conf
