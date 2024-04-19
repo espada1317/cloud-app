@@ -9,7 +9,7 @@ metadata:
 spec:
   endpoints:
     - honorLabels: true
-      port: cloud
+      port: web
   namespaceSelector:
     matchNames:
       - apps
