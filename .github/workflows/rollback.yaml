@@ -41,4 +41,4 @@ jobs:
       - name: Rollback deployment
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --region $GKE_ZONE
-          kubectl rollout undo deployment/cloud-app
+          kubectl rollout undo deployment/cloud-app -n monitoring
