@@ -18,7 +18,7 @@ env:
   DEPLOYMENT_NAME: cloud-app-deployment
 
 jobs:
-  deploy-docker-image:
+  configure-gloud:
     name: Deploy Docker Image to GCP Artifact Repository
     runs-on: ubuntu-latest
     steps:
@@ -39,6 +39,11 @@ jobs:
           version: latest
           install_components: 'gke-gcloud-auth-plugin'
 
+  deploy-image:
+    runs-on: ubuntu-latest
+    name: Deploy Image to Registry
+    steps:
+
       - name: Automatic Tagging of Releases
         id: increment-git-tag
         run: |
@@ -54,6 +59,10 @@ jobs:
           docker push $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:latest
           docker push $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GIT_TAG
 
+  deploy-cluster:
+    runs-on: ubuntu-latest
+    name: Deploy Cluster to GKE
+    steps:
       - name: Deploy Cluster to GKE
         env:
           GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
