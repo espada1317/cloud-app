@@ -24,6 +24,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("io.micrometer:micrometer-registry-prometheus")
+    implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
