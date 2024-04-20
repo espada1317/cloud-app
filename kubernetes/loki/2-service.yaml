@@ -10,5 +10,6 @@ spec:
   ports:
     - name: loki
       port: 3100
+      protocol: TCP
   selector:
     app: loki
