@@ -19,7 +19,7 @@ data:
       - job_name: cloud-app
         static_configs:
           - targets:
-              - cloud-app.monitoring:8080
+              - localhost:8080
             labels:
               job: "cloud-app"
               __path__: "/logs/application.log"
