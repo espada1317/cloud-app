@@ -5,7 +5,7 @@ metadata:
   name: cloud-app-service
   namespace: monitoring
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: cloud-app.load-balancer
+    kubernetes.io/ingress.global-static-ip-name: cloud-app-lb
   labels:
     app: cloud-app
 spec:
