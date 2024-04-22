@@ -1,7 +1,12 @@
 name: Rollback cloud-app image to previous version
 
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      imageTag:
+        description: 'Image Tag for Rollback'
+        required: true
+        default: '0'
 
 env:
   # GCP Auth settings
@@ -39,6 +44,17 @@ jobs:
           install_components: 'gke-gcloud-auth-plugin'
 
       - name: Rollback deployment
+        env:
+          IMAGE_TAG: ${{ github.event.inputs.imageTag }}
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          GAR_LOCATION: europe-central2
+          REPOSITORY: cloud-app-repository
+          IMAGE: cloud-app-image
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --region $GKE_ZONE
-          kubectl rollout undo deployment/cloud-app -n monitoring
+        
+          if [ "$IMAGE_TAG" = "0" ]; then
+            kubectl rollout undo deployment/cloud-app -n monitoring
+          else
+            kubectl set image deployment/cloud-app cloud-app=$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$IMAGE_TAG -n monitoring
+          fi
