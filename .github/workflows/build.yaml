@@ -66,7 +66,7 @@ jobs:
           sed -i "s/image-name/$IMAGE/g" kubernetes/app/2-deployment.yaml
           sed -i "s/image-version/$GIT_TAG/g" kubernetes/app/2-deployment.yaml
           
-          gcloud compute addresses create cloud-app-lb --global
+          gcloud compute addresses create cloud-app-lb --global --quiet
           
           kubectl apply -f kubernetes/crds         
           kubectl apply -f kubernetes/prometheus-operator         
