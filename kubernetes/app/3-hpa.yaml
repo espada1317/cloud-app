@@ -9,7 +9,7 @@ spec:
     kind: Deployment
     name: cloud-app
   minReplicas: 1
-  maxReplicas: 10
+  maxReplicas: 50
   metrics:
     - type: Resource
       resource:
