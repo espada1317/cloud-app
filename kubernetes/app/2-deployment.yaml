@@ -24,6 +24,22 @@ spec:
             - name: web
               containerPort: 8080
               protocol: TCP
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-configmap
+                  key: host
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: postgres_user
+                  name: postgres-credentials
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: postgres_password
           livenessProbe:
             failureThreshold: 10
             httpGet:

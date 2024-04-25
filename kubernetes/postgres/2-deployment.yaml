@@ -14,7 +14,7 @@ spec:
   selector:
     app: postgres
     tier: database
-  type: LoadBalancer
+  clusterIP: None
 
 ---
 apiVersion: v1

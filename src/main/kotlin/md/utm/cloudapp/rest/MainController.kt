@@ -1,5 +1,7 @@
 package md.utm.cloudapp.rest
 
+import md.utm.cloudapp.entity.Numbers
+import md.utm.cloudapp.service.NumbersService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import java.util.Random
@@ -8,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.env.Environment
 
 @RestController
-class MainController {
+class MainController(private val numbersService: NumbersService) {
 
     private val logger = KotlinLogging.logger {}
 
@@ -27,6 +29,10 @@ class MainController {
 
         logger.info { "Generated random number: $randomNumber" }
 
-        return "Hello World! From container: $containerName with random generated number: $randomNumber\n"
+        val numbers = Numbers(null, randomNumber)
+        numbersService.addNumbers(numbers)
+        val allNumbers: List<Numbers> = numbersService.getNumbers()
+
+        return "Hello World!<br>From container: $containerName<br>With random generated number: $randomNumber<br><br>All generated numbers from DB: $allNumbers"
     }
 }

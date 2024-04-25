@@ -25,6 +25,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("io.micrometer:micrometer-registry-prometheus")
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.postgresql:postgresql:42.2.23")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
