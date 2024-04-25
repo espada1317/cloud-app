@@ -78,6 +78,7 @@ spec:
               name: postgres
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
+              subPath: postgres-data  # Specify a subdirectory
               name: postgres-persistance-storage
       volumes:
         - name: postgres-persistance-storage
