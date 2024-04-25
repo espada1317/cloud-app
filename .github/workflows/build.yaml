@@ -73,5 +73,6 @@ jobs:
           kubectl apply -f kubernetes/prometheus       
           kubectl apply -f kubernetes/grafana      
           kubectl apply -f kubernetes/promtail    
-          kubectl apply -f kubernetes/loki       
+          kubectl apply -f kubernetes/loki
+          kubectl apply -f kubernetes/postgres
           kubectl apply -f kubernetes/app
