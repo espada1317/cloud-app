@@ -27,6 +27,6 @@ class MainController {
 
         logger.info { "Generated random number: $randomNumber" }
 
-        return "Hello World! with random number: $randomNumber\nFrom container: $containerName"
+        return "Hello World! From container: $containerName with random generated number: $randomNumber\n"
     }
 }
