@@ -43,7 +43,7 @@ spec:
           livenessProbe:
             failureThreshold: 10
             httpGet:
-              path: /
+              path: /actuator/health
               port: cloud
             periodSeconds: 10
             initialDelaySeconds: 5

@@ -5,4 +5,4 @@ metadata:
   namespace: monitoring
 data:
   host: "postgres"
-  name: "backendservice"
+  name: "cloud-app-db"
