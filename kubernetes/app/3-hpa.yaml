@@ -9,17 +9,17 @@ spec:
     kind: Deployment
     name: cloud-app
   minReplicas: 1
-  maxReplicas: 50
+  maxReplicas: 20
   metrics:
     - type: Resource
       resource:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 50
+          averageUtilization: 75
     - type: Resource
       resource:
         name: memory
         target:
           type: Utilization
-          averageUtilization: 50
+          averageUtilization: 75
