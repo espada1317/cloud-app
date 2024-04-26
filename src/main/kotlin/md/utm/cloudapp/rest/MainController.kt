@@ -17,7 +17,7 @@ class MainController(private val numbersService: NumbersService) {
     @Autowired
     private lateinit var env: Environment
 
-    @GetMapping("/")
+    @GetMapping("/hello")
     fun main(): String {
 
         val containerName = env.getProperty("HOSTNAME")
