@@ -32,7 +32,11 @@ class MainController(private val numbersService: NumbersService) {
         val numbers = Numbers(null, randomNumber)
         numbersService.addNumbers(numbers)
         val allNumbers: List<Numbers> = numbersService.getNumbers()
+        val numNumbers = allNumbers.size
 
-        return "Hello World!<br>From container: $containerName<br>With random generated number: $randomNumber<br><br>All generated numbers from DB: $allNumbers"
+        return "Hello World!<br>From container: $containerName" +
+                "<br>With random generated number: $randomNumber" +
+                "<br><br>Number of generated results: $numNumbers" +
+                "<br>All generated numbers from DB: $allNumbers"
     }
 }
