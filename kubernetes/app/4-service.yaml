@@ -4,14 +4,12 @@ kind: Ingress
 metadata:
   name: cloud-app-ingress
   namespace: monitoring
-  labels:
-    app: cloud-app
 spec:
   rules:
-    - host: cloudapp.service.com
+    - host: cloud-app.service.com
       http:
         paths:
-        - path: /hello
+        - path: /*
           pathType: ImplementationSpecific
           backend:
             service:
