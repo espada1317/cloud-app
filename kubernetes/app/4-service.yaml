@@ -4,8 +4,6 @@ kind: Ingress
 metadata:
   name: cloud-app-ingress
   namespace: monitoring
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
   labels:
     app: cloud-app
 spec:
