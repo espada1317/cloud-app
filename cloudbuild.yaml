@@ -13,11 +13,20 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'your-app'
+      - 'cloud-app'
       - '--image'
-      - 'gcr.io/$PROJECT_ID/cloud-app'
+      - 'gcr.io/$PROJECT_ID/your-app'
       - '--platform'
       - 'managed'
       - '--region'
       - 'europe-west1'
       - '--allow-unauthenticated'
+
+# Optional: Specify substitution variables
+substitutions:
+  _REGION: 'europe-west1'
+  _SERVICE_NAME: 'cloud-app'
+
+# Logging options
+options:
+  logging: CLOUD_LOGGING_ONLY
