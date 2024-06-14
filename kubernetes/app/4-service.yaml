@@ -1,27 +1,7 @@
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: cloud-app-ingress
-  namespace: monitoring
-spec:
-  rules:
-    - host: cloud-app.service.com
-      http:
-        paths:
-        - path: /*
-          pathType: ImplementationSpecific
-          backend:
-            service:
-              name: cloud-app
-              port:
-                number: 8080
----
 apiVersion: v1
 kind: Service
 metadata:
   name: cloud-app
-  namespace: monitoring
   labels:
     app: cloud-app
 spec:
