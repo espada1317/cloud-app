@@ -15,7 +15,7 @@ steps:
       - 'deploy'
       - 'cloud-app'
       - '--image'
-      - 'gcr.io/$PROJECT_ID/your-app'
+      - 'gcr.io/$PROJECT_ID/cloud-app'
       - '--platform'
       - 'managed'
       - '--region'
